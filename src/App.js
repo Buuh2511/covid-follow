@@ -7,7 +7,7 @@ import Summary from './components/Summary';
 function App() {
 
   const [countries, setCountries] = useState([])
-  const [selectedCountry, setSelectedCountry] = useState('');
+  const [selectedCountry, setSelectedCountry] = useState('NC');
   const [report, setReport] = useState([]);
 
 
@@ -23,15 +23,20 @@ function App() {
 
   }
 
+ 
+
   useEffect(() => {
-    const { Slug } = countries.find(country => country.ISO2 === selectedCountry.toUpperCase());
+ const Slug = countries.find(country => country.ISO2 === selectedCountry.toUpperCase());
     
-    getReportByCountry(Slug).then(res => {
+
+    
+
+    getReportByCountry(Slug.ISO2).then(res => {
       res.data.pop(); // xoa phan tu cuoi cung cua mang
       setReport(res.data)
     })
   }, [countries, selectedCountry])
-  console.log(selectedCountry);
+
 
 
   return (
