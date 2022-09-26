@@ -7,7 +7,7 @@ import Summary from './components/Summary';
 function App() {
 
   const [countries, setCountries] = useState([])
-  const [selectedCountry, setSelectedCountry] = useState('NC');
+  const [selectedCountry, setSelectedCountry] = useState('nc');
   const [report, setReport] = useState([]);
 
 
@@ -19,19 +19,13 @@ function App() {
 
 
   const handleOnChange = (e) => {
-    setSelectedCountry(e.target.value);
-
+    setSelectedCountry(e.target.value)
   }
 
- 
+
 
   useEffect(() => {
- const Slug = countries.find(country => country.ISO2 === selectedCountry.toUpperCase());
-    
-
-    
-
-    getReportByCountry(Slug.ISO2).then(res => {
+    getReportByCountry(selectedCountry).then(res => {
       res.data.pop(); // xoa phan tu cuoi cung cua mang
       setReport(res.data)
     })

@@ -3,9 +3,9 @@ import { FormControl, FormHelperText, InputLabel, NativeSelect } from "@mui/mate
 
 
 
-export default function CountrySelector({value, handleOnChange, countries}){
+export default function CountrySelector({ value, handleOnChange, countries }) {
 
-    return(
+    return (
         <div>
             <FormControl>
                 <InputLabel htmlFor="" shrink >Quốc gia</InputLabel>
@@ -13,20 +13,20 @@ export default function CountrySelector({value, handleOnChange, countries}){
                     value={value}
                     onChange={handleOnChange}
                     inputProps={{
-                        name : 'country',
+                        name: 'country',
                         id: 'country-selector',
                     }}
                 >
                     {
-                       countries.map((country) => {
-                        return (
-                            <option 
-                            key={country.ISO2}
-                            value={country.ISO2}>
-                            {country.Country}
-                        </option>
-                        )
-                       }) 
+                        countries.map((country) => {
+                            return (
+                                <option
+                                    key={country.ISO2}
+                                    value={country.ISO2.toLowerCase()}>
+                                    {country.Country}
+                                </option>
+                            )
+                        })
                     }
                 </NativeSelect>
                 <FormHelperText>Lựa chọn quốc gia</FormHelperText>
