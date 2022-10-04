@@ -7,7 +7,7 @@ import Summary from './components/Summary';
 function App() {
 
   const [countries, setCountries] = useState([])
-  const [selectedCountry, setSelectedCountry] = useState('nc');
+  const [selectedCountry, setSelectedCountry] = useState('');
   const [report, setReport] = useState([]);
 
 
@@ -25,19 +25,24 @@ function App() {
 
 
   useEffect(() => {
-    getReportByCountry(selectedCountry).then(res => {
-      res.data.pop(); // xoa phan tu cuoi cung cua mang
-      setReport(res.data)
-    })
-  }, [countries, selectedCountry])
 
+    if (selectedCountry) {
+      const { Slug } = countries.find((country) => country.ISO2.toLowerCase() === selectedCountry)
+      getReportByCountry(Slug).then(res => {
+        res.data.pop(); // xoa phan tu cuoi cung cua mang
+        setReport(res.data)
+      })
+    }
+    console.log(report);
+
+  }, [countries, selectedCountry])
 
 
   return (
     <div style={{ paddingTop: '20px', paddingLeft: "50px" }}>
       <CountrySelector countries={countries} handleOnChange={handleOnChange} />
-      <Highlight />
-      <Summary />
+      <Highlight report={report} />
+      <Summary report={report} />
     </div>
   );
 }
