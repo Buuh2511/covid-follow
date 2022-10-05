@@ -22,21 +22,17 @@ function App() {
     setSelectedCountry(e.target.value)
   }
 
-
-
   useEffect(() => {
 
     if (selectedCountry) {
       const { Slug } = countries.find((country) => country.ISO2.toLowerCase() === selectedCountry)
-      getReportByCountry(Slug).then(res => {
+       getReportByCountry(Slug).then(res => {
         res.data.pop(); // xoa phan tu cuoi cung cua mang
         setReport(res.data)
       })
     }
-    console.log(report);
 
   }, [countries, selectedCountry])
-
 
   return (
     <div style={{ paddingTop: '20px', paddingLeft: "50px" }}>
